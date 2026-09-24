@@ -2,42 +2,44 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddCors(options =>
     {
-        options.AddDefaultPolicy( policity =>
+        options.AddDefaultPolicy(policy =>
             {
-                policity
+                policy
                     .AllowAnyOrigin()
                     .AllowAnyHeader()
                     .AllowAnyMethod();
             }
-        )
+        );
     }
-)
+);
 
 var app = builder.Build();
 
-app.UseCors()
+app.UseCors();
 
-app.MapGet("/",() =>
+app.MapGet("/", () =>
 {
     return "API Polleria funcionando";
 });
 
-app.MapGet("/api/polleria",() =>
+app.MapGet("/api/polleria", () =>
 {
     return Results.Ok(new[]
     {
-        new{
-            id=1,
-            codigo="P001",
-            nombre="Pollo a la brasa",
+        new
+        {
+            id = 1,
+            codigo = "P001",
+            nombre = "Pollo a la brasa",
         },
-        new{
-            id=2,
-            codigo="P002",
-            nombre="Pollo broaster",
+        new
+        {
+            id = 2,
+            codigo = "P002",
+            nombre = "Pollo broaster",
         }
     });
 });
 
-var port = Environment.GetEnvironmentVariable("Port")??"10000",
+var port = Environment.GetEnvironmentVariable("PORT") ?? "10000";
 app.Run($"http://0.0.0.0:{port}");
