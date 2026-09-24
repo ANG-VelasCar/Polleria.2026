@@ -1,0 +1,6 @@
+@PolleriaBarberia_HostAddress = http://localhost:5200
+
+GET {{PolleriaBarberia_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
